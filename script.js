@@ -7,9 +7,9 @@ window.onload = () => {
   function loadGame() {
     const saved = JSON.parse(localStorage.getItem("mineclicker-save"));
     if (saved) {
-      count = saved.count ?? 0;
-      pickaxeLevel = saved.pickaxeLevel ?? 1;
-      miners = saved.miners ?? 0;
+count = (saved.count !== undefined) ? saved.count : 0;
+pickaxeLevel = (saved.pickaxeLevel !== undefined) ? saved.pickaxeLevel : 1;
+miners = (saved.miners !== undefined) ? saved.miners : 0;
     }
   }
 

@@ -8,32 +8,27 @@
 </head>
 <body>
   <h1>⛏️ Mine Clicker</h1>
-  <p>Total Resources Mined: <span id="totalCount">0</span></p>
-  <p>Current Block: <span id="currentLayer">Stone</span></p>
 
+  <p>Total Resources Mined: <span id="totalCount">0</span></p>
+  <p>Current Pickaxe Power: <span id="pickaxePower">1</span></p>
+  <p>Prestige Level: <span id="prestigeLevel">0</span></p>
+
+  <!-- Clickable block -->
   <img id="mineBlock" src="stone.png" onclick="mine()" alt="Mine block" />
 
-  <div id="inventory">
-    <h2>🧱 Inventory</h2>
-    <p>Stone: <span id="stone">0</span></p>
-    <p>Coal: <span id="coal">0</span></p>
-    <p>Iron: <span id="iron">0</span></p>
-    <p>Diamond: <span id="diamond">0</span></p>
-  </div>
-
+  <!-- Upgrade section -->
   <div id="upgrades">
     <h2>🪓 Pickaxe Upgrades</h2>
-    <button onclick="buyPickaxe(2)">Upgrade to Lv.2 (100 Stone)</button>
-    <button onclick="buyPickaxe(3)">Upgrade to Lv.3 (50 Coal)</button>
-    <button onclick="buyPickaxe(4)">Upgrade to Lv.4 (30 Iron)</button>
-    <button onclick="buyPickaxe(5)">Upgrade to Lv.5 (10 Diamond)</button>
-    <p>Pickaxe Power: <span id="pickaxePower">1</span></p>
+    <button onclick="buyPickaxe(2)">Upgrade to Lv.2 (100 Clicks)</button>
+    <button onclick="buyPickaxe(3)">Upgrade to Lv.3 (500 Clicks)</button>
+    <button onclick="buyPickaxe(4)">Upgrade to Lv.4 (1500 Clicks)</button>
+    <button onclick="buyPickaxe(5)">Upgrade to Lv.5 (5000 Clicks)</button>
   </div>
 
+  <!-- Prestige section -->
   <div id="prestige">
     <h2>💎 Prestige</h2>
-    <p>Prestige Level: <span id="prestigeLevel">0</span></p>
-    <button onclick="prestige()">Prestige (Requires 1000 Diamonds)</button>
+    <button onclick="prestige()">Prestige (Need 10000 Clicks)</button>
   </div>
 
   <script src="script.js"></script>

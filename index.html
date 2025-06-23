@@ -5,11 +5,27 @@
   <title>Mine Clicker</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  
+  <!-- AdSense script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3427704918049291"
+     crossorigin="anonymous"></script>
 </head>
 <body>
   <h1>⛏️ Mine Clicker</h1>
 
-  <div class="game-container">
+  <!-- Left Sticky Ad -->
+  <div style="position: fixed; left: 0; top: 120px; width: 160px; height: 600px; z-index: 999;">
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:160px;height:600px"
+         data-ad-client="ca-pub-3427704918049291"
+         data-ad-slot="6785548932"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
+  <!-- Main Game UI -->
+  <div class="game-container" style="margin-left: 180px;">
     <img src="stone.png" id="mineBlock" onclick="mine()" />
 
     <p>Blocks Mined: <span id="totalCount">0</span></p>
@@ -22,6 +38,8 @@
 
     <h2>🔧 Upgrades</h2>
     <button onclick="buyPickaxe()">🪓 Upgrade Pickaxe (Cost: <span id="pickaxeCost">50</span>)</button>
+    <button onclick="buyFortune()">💰 Fortune (Max 3)</button>
+    <button onclick="buyEfficiency()">⚡ Efficiency (Max 5)</button>
 
     <hr />
 
@@ -33,8 +51,6 @@
     <button onclick="prestige()">🏆 Prestige</button>
     <button onclick="resetGame()">🔁 Reset Game</button>
   </div>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3427704918049291"
-     crossorigin="anonymous"></script>
 
   <script src="script.js"></script>
 </body>

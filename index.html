@@ -4,34 +4,34 @@
   <meta charset="UTF-8" />
   <title>Mine Clicker</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
   <h1>⛏️ Mine Clicker</h1>
 
   <div class="game-container">
-    <img src="stone.png" alt="Stone" id="mineBlock" onclick="mine()" />
+    <img src="stone.png" id="mineBlock" onclick="mine()" />
 
-    <div class="stats">
-      <p>🪨 Resources: <span id="totalCount">0</span></p>
-      <p>⚒️ Pickaxe Power: <span id="pickaxePower">1</span></p>
-      <p>🔥 RPS: <span id="totalRPS">0</span></p>
-      <p>✨ Prestige Level: <span id="prestigeLevel">0</span></p>
-    </div>
-
-    <hr />
-
-    <div class="upgrades">
-      <button onclick="buyPickaxe()">Upgrade Pickaxe (<span id="pickaxeCost">50</span> blocks)</button>
-      <button onclick="prestige()">Prestige (Resets for +10% income)</button>
-    </div>
+    <p>Blocks Mined: <span id="totalCount">0</span></p>
+    <p>Resources Per Click: <span id="pickaxePower">1</span></p>
+    <p>Resources Per Second: <span id="rps">0</span></p>
+    <p>Prestige Level: <span id="prestigeLevel">0</span></p>
+    <p>Prestige Cost: <span id="prestigeCost">10000</span></p>
 
     <hr />
 
-    <h2>🔧 Auto-Miners</h2>
-    <div class="miners" id="minersContainer">
-      <!-- Miners will be inserted here by JS -->
-    </div>
+    <h2>Upgrades</h2>
+    <button onclick="buyPickaxe()">🪓 Upgrade Pickaxe (Cost: <span id="pickaxeCost">50</span>)</button>
+
+    <hr />
+
+    <h2>Auto-Miners</h2>
+    <div id="minersContainer"></div>
+
+    <hr />
+
+    <button onclick="prestige()">🏆 Prestige</button>
+    <button onclick="resetGame()">🔁 Reset Game</button>
   </div>
 
   <script src="script.js"></script>

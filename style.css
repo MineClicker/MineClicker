@@ -1,33 +1,35 @@
 body {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-family: 'Press Start 2P', sans-serif;
   margin: 0;
   padding: 0;
-  font-family: 'Press Start 2P', cursive;
-  background-color: #f0f0f0;
-  text-align: center;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  touch-action: manipulation;
   overflow-x: hidden;
 }
 
-img#mineBlock {
-  width: 150px;
-  height: auto;
-  cursor: pointer;
-  touch-action: manipulation;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
 button {
-  font-size: 12px;
+  background-color: #333;
+  color: #fff;
+  border: 2px solid #666;
   padding: 10px;
-  margin: 10px;
-  touch-action: manipulation;
+  margin: 5px;
+  cursor: pointer;
 }
 
+button:hover {
+  background-color: #555;
+}
+
+h1, h2 {
+  color: #ffcc00;
+}
 
 hr {
-  border: 1px solid #666;
+  border-color: #444;
+}
+
+.game-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
 }

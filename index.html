@@ -58,5 +58,17 @@
   </div>
 
   <script src="script.js"></script>
+
+  <script>
+  let lastTouchEnd = 0;
+  document.addEventListener('touchend', function (event) {
+    let now = new Date().getTime();
+    if (now - lastTouchEnd <= 300) {
+      event.preventDefault(); // Prevent zoom
+    }
+    lastTouchEnd = now;
+  }, false);
+</script>
+
 </body>
 </html>

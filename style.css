@@ -1,72 +1,25 @@
-/* Background and overall font */
 body {
-  background-color: #1b1b1b;
-  color: #d2d2d2;
-  font-family: "Press Start 2P", monospace;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  font-family: 'Press Start 2P', monospace;
   text-align: center;
   padding: 20px;
-  margin: 0;
 }
 
-/* Header */
-h1 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #fff;
-}
-
-/* Game container box */
-.game-container {
-  background-color: #2b2b2b;
-  padding: 20px;
-  border-radius: 12px;
-  max-width: 600px;
-  margin: auto;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-}
-
-/* The block image (clickable) */
-img#mineBlock {
+img {
   width: 128px;
-  height: 128px;
   cursor: pointer;
-  transition: transform 0.1s ease;
-  margin-bottom: 10px;
-  image-rendering: pixelated;
+  margin-bottom: 20px;
 }
 
-/* On click: animate with a small squish + rotate */
-img#mineBlock:active {
-  transform: scale(0.95) rotate(-2deg);
-}
-
-/* Buttons (for upgrades) */
 button {
-  background-color: #444;
-  color: #fff;
-  padding: 10px 15px;
-  margin: 8px;
-  font-size: 0.8rem;
-  border: none;
-  border-radius: 8px;
+  margin: 10px;
+  padding: 10px;
+  font-size: 12px;
+  font-family: 'Press Start 2P', monospace;
   cursor: pointer;
-  transition: background 0.2s ease;
 }
 
-button:hover {
-  background-color: #666;
-}
-
-/* Section headings */
-h2 {
+#inventory, #upgrades {
   margin-top: 30px;
-  font-size: 1.2rem;
-  color: #f5f5f5;
-}
-
-/* Separators */
-hr {
-  border: none;
-  border-top: 1px solid #555;
-  margin: 20px 0;
 }

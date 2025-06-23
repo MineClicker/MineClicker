@@ -1,3 +1,4 @@
+/* Base styles */
 body {
   background-color: #111;
   color: white;
@@ -5,31 +6,83 @@ body {
   margin: 0;
   padding: 0;
   text-align: center;
+  overflow-x: hidden;
+}
+
+h1, h2 {
+  color: #ffcc00;
+  margin: 20px 0;
+}
+
+hr {
+  border-color: #444;
+  margin: 20px auto;
+  width: 80%;
 }
 
 button {
   background-color: #333;
   color: #fff;
   border: 2px solid #666;
-  padding: 10px;
-  margin: 5px;
+  padding: 10px 15px;
+  margin: 8px;
   cursor: pointer;
+  font-size: 12px;
+  font-family: 'Press Start 2P', cursive;
 }
 
 button:hover {
   background-color: #555;
 }
 
-h1, h2 {
-  color: #ffcc00;
-}
-
-hr {
-  border-color: #444;
-}
-
+/* Game layout */
 .game-container {
   padding: 20px;
   max-width: 600px;
-  margin: auto;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+#mineBlock {
+  width: 150px;
+  height: auto;
+  margin: 20px 0;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+/* Side ads on desktop */
+.side-ad {
+  position: fixed;
+  top: 120px;
+  left: 0;
+  width: 160px;
+  height: 600px;
+  z-index: 999;
+}
+
+/* Responsive fixes for mobile */
+@media (max-width: 768px) {
+  .game-container {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  #mineBlock {
+    width: 100px;
+  }
+
+  .side-ad {
+    display: none;
+  }
+
+  button {
+    font-size: 10px;
+    padding: 8px 10px;
+  }
+
+  body {
+    font-size: 10px;
+  }
 }

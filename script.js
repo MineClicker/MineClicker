@@ -23,8 +23,37 @@ window.onload = () => {
     setTimeout(() => (block.style.transform = "scale(1)"), 100);
   }
 
+  function buyPickaxe(level) {
+    const costs = {
+      2: 100,
+      3: 500,
+      4: 1500,
+      5: 5000,
+    };
+    if (level > pickaxePower && totalCount >= costs[level]) {
+      totalCount -= costs[level];
+      pickaxePower = level;
+      updateUI();
+      saveGame();
+    }
+  }
+
+  function prestige() {
+    if (totalCount >= 10000) {
+      totalCount = 0;
+      pickaxePower = 1;
+      prestigeLevel++;
+      updateUI();
+      saveGame();
+    }
+  }
+
   function saveGame() {
-    const saveData = { totalCount, pickaxePower, prestigeLevel };
+    const saveData = {
+      totalCount,
+      pickaxePower,
+      prestigeLevel,
+    };
     localStorage.setItem("mineclicker-save", JSON.stringify(saveData));
   }
 
@@ -40,7 +69,7 @@ window.onload = () => {
   loadGame();
   updateUI();
 
-  // 👇 THIS IS IMPORTANT 👇
+  // ✅ Make functions accessible from HTML
   window.mine = mine;
   window.buyPickaxe = buyPickaxe;
   window.prestige = prestige;

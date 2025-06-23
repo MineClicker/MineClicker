@@ -6,11 +6,12 @@ window.onload = () => {
   let pickaxeCost = 50;
 
   const autominers = [
-    { name: "Iron Golem", cost: 200, rps: 1, owned: 0 },
-    { name: "Wither", cost: 1000, rps: 5, owned: 0 },
-    { name: "Dragon", cost: 5000, rps: 20, owned: 0 },
-    { name: "Warden", cost: 20000, rps: 100, owned: 0 },
-  ];
+  { name: "Iron Golem", baseCost: 200, cost: 200, rps: 1, owned: 0 },
+  { name: "Wither", baseCost: 1000, cost: 1000, rps: 5, owned: 0 },
+  { name: "Dragon", baseCost: 5000, cost: 5000, rps: 20, owned: 0 },
+  { name: "Warden", baseCost: 20000, cost: 20000, rps: 100, owned: 0 },
+];
+
 
   function mine() {
     const gain = pickaxePower * (1 + prestigeLevel * 0.1);

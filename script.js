@@ -6,12 +6,11 @@ window.onload = () => {
   let pickaxeCost = 50;
 
   const autominers = [
-  { name: "Iron Golem", baseCost: 200, cost: 200, rps: 1, owned: 0 },
-  { name: "Wither", baseCost: 1000, cost: 1000, rps: 5, owned: 0 },
-  { name: "Dragon", baseCost: 5000, cost: 5000, rps: 20, owned: 0 },
-  { name: "Warden", baseCost: 20000, cost: 20000, rps: 100, owned: 0 },
-];
-
+    { name: "Iron Golem", baseCost: 200, cost: 200, rps: 1, owned: 0 },
+    { name: "Wither", baseCost: 1000, cost: 1000, rps: 5, owned: 0 },
+    { name: "Dragon", baseCost: 5000, cost: 5000, rps: 20, owned: 0 },
+    { name: "Warden", baseCost: 20000, cost: 20000, rps: 100, owned: 0 },
+  ];
 
   function mine() {
     const gain = pickaxePower * (1 + prestigeLevel * 0.1);
@@ -71,19 +70,15 @@ window.onload = () => {
       prestigeLevel++;
       updateUI();
       saveGame();
-    } 
-  }   
-      
+    }
+  }
+
   function resetGame() {
-  const confirmReset = confirm("Are you sure you want to reset your progress?");
-  if (!confirmReset) return;
+    const confirmReset = confirm("Are you sure you want to reset your progress?");
+    if (!confirmReset) return;
 
-  localStorage.removeItem("mineclicker-save");
-
-  // Delay reload slightly to ensure localStorage clears first
-  setTimeout(() => {
-    location.reload();
-  }, 100);
+    localStorage.removeItem("mineclicker-save");
+    location.href = location.href; // force hard reload
   }
 
   function updateUI() {
@@ -104,14 +99,23 @@ window.onload = () => {
   }
 
   function saveGame() {
+    const cleanMiners = autominers.map(m => ({
+      name: m.name,
+      baseCost: m.baseCost,
+      cost: m.cost,
+      rps: m.rps,
+      owned: m.owned
+    }));
+
     const saveData = {
       totalCount,
       pickaxePower,
       pickaxeLevel,
       pickaxeCost,
       prestigeLevel,
-      autominers,
+      autominers: cleanMiners
     };
+
     localStorage.setItem("mineclicker-save", JSON.stringify(saveData));
   }
 
@@ -123,6 +127,7 @@ window.onload = () => {
       pickaxeLevel = saved.pickaxeLevel ?? 1;
       pickaxeCost = saved.pickaxeCost ?? 50;
       prestigeLevel = saved.prestigeLevel ?? 0;
+
       if (saved.autominers) {
         saved.autominers.forEach((data, i) => {
           if (autominers[i]) {
@@ -134,7 +139,7 @@ window.onload = () => {
     }
   }
 
-  // Run
+  // Initial setup
   loadGame();
   updateUI();
   setInterval(() => {
@@ -143,7 +148,7 @@ window.onload = () => {
     saveGame();
   }, 1000);
 
-  // Expose functions
+  // Expose to window
   window.mine = mine;
   window.buyPickaxe = buyPickaxe;
   window.buyMiner = buyMiner;

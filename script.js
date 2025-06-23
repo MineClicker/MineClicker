@@ -3,13 +3,6 @@ window.onload = () => {
   let pickaxePower = 1;
   let prestigeLevel = 0;
 
-  const powerUpgrades = {
-    2: 100,
-    3: 500,
-    4: 1500,
-    5: 5000,
-  };
-
   function updateUI() {
     document.getElementById("totalCount").textContent = Math.floor(totalCount);
     document.getElementById("pickaxePower").textContent = pickaxePower;
@@ -30,38 +23,8 @@ window.onload = () => {
     setTimeout(() => (block.style.transform = "scale(1)"), 100);
   }
 
-  function buyPickaxe(level) {
-    if (pickaxePower >= level) return;
-    const cost = powerUpgrades[level];
-    if (totalCount >= cost) {
-      totalCount -= cost;
-      pickaxePower = level;
-      updateUI();
-      saveGame();
-    } else {
-      alert("Not enough clicks to upgrade!");
-    }
-  }
-
-  function prestige() {
-    if (totalCount >= 10000) {
-      prestigeLevel++;
-      pickaxePower = 1;
-      totalCount = 0;
-      alert("You prestiged! Mining is now 10% faster per level.");
-      updateUI();
-      saveGame();
-    } else {
-      alert("You need 10,000 clicks to prestige.");
-    }
-  }
-
   function saveGame() {
-    const saveData = {
-      totalCount,
-      pickaxePower,
-      prestigeLevel,
-    };
+    const saveData = { totalCount, pickaxePower, prestigeLevel };
     localStorage.setItem("mineclicker-save", JSON.stringify(saveData));
   }
 
@@ -76,4 +39,7 @@ window.onload = () => {
 
   loadGame();
   updateUI();
+
+  // 👇 THIS IS IMPORTANT 👇
+  window.mine = mine;
 };

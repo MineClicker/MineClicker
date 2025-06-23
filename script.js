@@ -24,12 +24,7 @@ window.onload = () => {
   }
 
   function buyPickaxe(level) {
-    const costs = {
-      2: 100,
-      3: 500,
-      4: 1500,
-      5: 5000,
-    };
+    const costs = { 2: 100, 3: 500, 4: 1500, 5: 5000 };
     if (level > pickaxePower && totalCount >= costs[level]) {
       totalCount -= costs[level];
       pickaxePower = level;
@@ -42,19 +37,18 @@ window.onload = () => {
     if (totalCount >= 10000) {
       totalCount = 0;
       pickaxePower = 1;
-      prestigeLevel++;
+      prestigeLevel += 1;
       updateUI();
       saveGame();
     }
   }
 
   function saveGame() {
-    const saveData = {
+    localStorage.setItem("mineclicker-save", JSON.stringify({
       totalCount,
       pickaxePower,
-      prestigeLevel,
-    };
-    localStorage.setItem("mineclicker-save", JSON.stringify(saveData));
+      prestigeLevel
+    }));
   }
 
   function loadGame() {
@@ -69,8 +63,8 @@ window.onload = () => {
   loadGame();
   updateUI();
 
-  // ✅ Make functions accessible from HTML
-  window.mine = mine;
+  // Expose to HTML
+  document.getElementById("mineBlock").addEventListener("click", mine);
   window.buyPickaxe = buyPickaxe;
   window.prestige = prestige;
 };

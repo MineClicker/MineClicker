@@ -4,16 +4,32 @@
   <meta charset="UTF-8" />
   <title>Mine Clicker</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Pixel Minecraft-style font -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
   <h1>⛏️ Mine Clicker</h1>
 
   <div class="game-container">
+    <!-- The clickable stone block -->
     <img src="stone.png" alt="Stone Block" id="mineBlock" onclick="mine()" />
+
+    <!-- Counters -->
     <p>Resources Mined: <span id="count">0</span></p>
     <p>Resources per second: <span id="rps">0</span></p>
 
     <hr />
+
+    <!-- Upgrades -->
     <h2>Upgrades</h2>
-    <button onclick="buyPickaxe()">🪓 Better Pickaxe (10 blocks)<
+    <button onclick="buyPickaxe()">🪓 Better Pickaxe (10 blocks)</button>
+    <p>Pickaxe Level: <span id="pickaxeLevel">1</span></p>
+
+    <button onclick="buyMiner()">🤖 Auto-Miner (50 blocks)</button>
+    <p>Miners: <span id="miners">0</span></p>
+  </div>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>

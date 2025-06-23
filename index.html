@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>MineLayer Clicker</title>
+  <title>Mine Clicker</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <h1>⛏️ MineLayer Clicker</h1>
+  <h1>⛏️ Mine Clicker</h1>
+  <p>Total Resources Mined: <span id="totalCount">0</span></p>
   <p>Current Block: <span id="currentLayer">Stone</span></p>
+
   <img id="mineBlock" src="stone.png" onclick="mine()" alt="Mine block" />
 
   <div id="inventory">
@@ -20,9 +22,18 @@
   </div>
 
   <div id="upgrades">
-    <h2>🛠️ Crafting</h2>
-    <button onclick="craftPickaxe()">Craft Better Pickaxe</button>
+    <h2>🪓 Pickaxe Upgrades</h2>
+    <button onclick="buyPickaxe(2)">Upgrade to Lv.2 (100 Stone)</button>
+    <button onclick="buyPickaxe(3)">Upgrade to Lv.3 (50 Coal)</button>
+    <button onclick="buyPickaxe(4)">Upgrade to Lv.4 (30 Iron)</button>
+    <button onclick="buyPickaxe(5)">Upgrade to Lv.5 (10 Diamond)</button>
     <p>Pickaxe Power: <span id="pickaxePower">1</span></p>
+  </div>
+
+  <div id="prestige">
+    <h2>💎 Prestige</h2>
+    <p>Prestige Level: <span id="prestigeLevel">0</span></p>
+    <button onclick="prestige()">Prestige (Requires 1000 Diamonds)</button>
   </div>
 
   <script src="script.js"></script>

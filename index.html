@@ -2,34 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Mine Clicker</title>
+  <title>MineLayer Clicker</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- Pixel Minecraft-style font -->
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <h1>⛏️ Mine Clicker</h1>
+  <h1>⛏️ MineLayer Clicker</h1>
+  <p>Current Block: <span id="currentLayer">Stone</span></p>
+  <img id="mineBlock" src="stone.png" onclick="mine()" alt="Mine block" />
 
-  <div class="game-container">
-    <!-- The clickable stone block -->
-    <img src="stone.png" alt="Stone Block" id="mineBlock" onclick="mine()" />
-
-    <!-- Counters -->
-    <p>Resources Mined: <span id="count">0</span></p>
-    <p>Resources per second: <span id="rps">0</span></p>
-
-    <hr />
-
-    <!-- Upgrades -->
-    <h2>Upgrades</h2>
-    <button onclick="buyPickaxe()">🪓 Better Pickaxe (10 blocks)</button>
-    <p>Pickaxe Level: <span id="pickaxeLevel">1</span></p>
-
-    <button onclick="buyMiner()">🤖 Auto-Miner (50 blocks)</button>
-    <p>Miners: <span id="miners">0</span></p>
+  <div id="inventory">
+    <h2>🧱 Inventory</h2>
+    <p>Stone: <span id="stone">0</span></p>
+    <p>Coal: <span id="coal">0</span></p>
+    <p>Iron: <span id="iron">0</span></p>
+    <p>Diamond: <span id="diamond">0</span></p>
   </div>
 
-  <!-- Script -->
+  <div id="upgrades">
+    <h2>🛠️ Crafting</h2>
+    <button onclick="craftPickaxe()">Craft Better Pickaxe</button>
+    <p>Pickaxe Power: <span id="pickaxePower">1</span></p>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>

@@ -70,13 +70,16 @@ window.onload = () => {
       prestigeLevel++;
       updateUI();
       saveGame();
-    }
-  }
-
+    } 
+  }   
+      
   function resetGame() {
-    localStorage.removeItem("mineclicker-save");
-    location.reload();
-  }
+    const confirmReset = confirm("Are you sure you want to reset your progress?");
+    if (!confirmReset) return;
+      
+     localStorage.removeItem("mineclicker-save");
+     location.reload();
+}
 
   function updateUI() {
     document.getElementById("totalCount").textContent = Math.floor(totalCount);

@@ -1,5 +1,5 @@
 body {
-  background-color: #111;
+  background-color: #121212;
   color: #fff;
   font-family: 'Press Start 2P', cursive;
   text-align: center;
@@ -8,19 +8,30 @@ body {
 
 img#mineBlock {
   width: 128px;
+  margin: 20px;
   cursor: pointer;
-  transition: transform 0.1s;
+  transition: transform 0.1s ease;
 }
 
-img#mineBlock:active {
-  transform: scale(0.95);
-}
-
-#inventory, #upgrades, #prestige {
-  margin-top: 20px;
-  border: 1px solid #444;
-  padding: 10px;
-  border-radius: 8px;
+#upgrades, #prestige {
+  margin-top: 30px;
   background-color: #222;
+  padding: 20px;
+  border-radius: 10px;
   display: inline-block;
+}
+
+button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+}
+
+button:hover {
+  background-color: #555;
 }

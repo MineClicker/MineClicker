@@ -75,12 +75,16 @@ window.onload = () => {
   }   
       
   function resetGame() {
-    const confirmReset = confirm("Are you sure you want to reset your progress?");
-    if (!confirmReset) return;
-      
-     localStorage.removeItem("mineclicker-save");
-     location.reload();
-}
+  const confirmReset = confirm("Are you sure you want to reset your progress?");
+  if (!confirmReset) return;
+
+  localStorage.removeItem("mineclicker-save");
+
+  // Delay reload slightly to ensure localStorage clears first
+  setTimeout(() => {
+    location.reload();
+  }, 100);
+  }
 
   function updateUI() {
     document.getElementById("totalCount").textContent = Math.floor(totalCount);

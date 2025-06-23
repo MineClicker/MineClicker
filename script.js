@@ -3,6 +3,7 @@ window.onload = () => {
   let pickaxePower = 1;
   let pickaxeLevel = 1;
   let prestigeLevel = 0;
+  let pickaxeCost = 50;
 
   const autominers = [
     { name: "Iron Golem", cost: 200, rps: 1, owned: 0 },
@@ -10,29 +11,6 @@ window.onload = () => {
     { name: "Dragon", cost: 5000, rps: 20, owned: 0 },
     { name: "Warden", cost: 20000, rps: 100, owned: 0 },
   ];
-
-  let pickaxeCost = 50;
-
-  function updateUI() {
-    document.getElementById("totalCount").textContent = Math.floor(totalCount);
-    document.getElementById("pickaxePower").textContent = pickaxePower;
-    document.getElementById("rps").textContent = calculateRPS();
-    document.getElementById("pickaxeCost").textContent = pickaxeCost;
-    document.getElementById("prestigeLevel").textContent = prestigeLevel;
-    document.getElementById("prestigeCost").textContent = getPrestigeCost();
-
-    const minerHTML = autominers.map((miner, index) => `
-      <div>
-        <button onclick="buyMiner(${index})">💠 ${miner.name} (Cost: ${miner.cost})</button>
-        <span>Owned: ${miner.owned}</span>
-      </div>
-    `).join('');
-    document.getElementById("minersContainer").innerHTML = minerHTML;
-  }
-
-  function calculateRPS() {
-    return autominers.reduce((sum, m) => sum + m.rps * m.owned, 0);
-  }
 
   function mine() {
     const gain = pickaxePower * (1 + prestigeLevel * 0.1);
@@ -70,6 +48,10 @@ window.onload = () => {
     }
   }
 
+  function calculateRPS() {
+    return autominers.reduce((sum, m) => sum + m.rps * m.owned, 0);
+  }
+
   function getPrestigeCost() {
     return 10000 * (prestigeLevel + 1);
   }
@@ -83,7 +65,7 @@ window.onload = () => {
       pickaxeCost = 50;
       autominers.forEach(m => {
         m.owned = 0;
-        m.cost = m.cost; // Reset cost to original
+        m.cost = m.baseCost;
       });
       prestigeLevel++;
       updateUI();
@@ -94,6 +76,23 @@ window.onload = () => {
   function resetGame() {
     localStorage.removeItem("mineclicker-save");
     location.reload();
+  }
+
+  function updateUI() {
+    document.getElementById("totalCount").textContent = Math.floor(totalCount);
+    document.getElementById("pickaxePower").textContent = pickaxePower;
+    document.getElementById("rps").textContent = calculateRPS();
+    document.getElementById("pickaxeCost").textContent = pickaxeCost;
+    document.getElementById("prestigeLevel").textContent = prestigeLevel;
+    document.getElementById("prestigeCost").textContent = getPrestigeCost();
+
+    const minerHTML = autominers.map((m, i) => `
+      <div>
+        <button onclick="buyMiner(${i})">💠 ${m.name} (Cost: ${m.cost})</button>
+        <span> Owned: ${m.owned}</span>
+      </div>
+    `).join('');
+    document.getElementById("minersContainer").innerHTML = minerHTML;
   }
 
   function saveGame() {
@@ -117,16 +116,17 @@ window.onload = () => {
       pickaxeCost = saved.pickaxeCost ?? 50;
       prestigeLevel = saved.prestigeLevel ?? 0;
       if (saved.autominers) {
-        saved.autominers.forEach((savedMiner, i) => {
+        saved.autominers.forEach((data, i) => {
           if (autominers[i]) {
-            autominers[i].owned = savedMiner.owned;
-            autominers[i].cost = savedMiner.cost;
+            autominers[i].owned = data.owned;
+            autominers[i].cost = data.cost;
           }
         });
       }
     }
   }
 
+  // Run
   loadGame();
   updateUI();
   setInterval(() => {
@@ -135,6 +135,7 @@ window.onload = () => {
     saveGame();
   }, 1000);
 
+  // Expose functions
   window.mine = mine;
   window.buyPickaxe = buyPickaxe;
   window.buyMiner = buyMiner;

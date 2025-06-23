@@ -1,10 +1,10 @@
 body {
-  background-color: #1a1a1a;
-  color: #ffffff;
-  font-family: 'Press Start 2P', sans-serif;
+  background-color: #111;
+  color: white;
+  font-family: 'Press Start 2P', cursive;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  text-align: center;
 }
 
 button {

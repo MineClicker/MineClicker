@@ -6,19 +6,17 @@
   <title>Mine Clicker</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  
-  <!-- AdSense script -->
+
+  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3427704918049291"
      crossorigin="anonymous"></script>
-
   <meta name="google-adsense-account" content="ca-pub-3427704918049291">
-
 </head>
 <body>
   <h1>⛏️ Mine Clicker</h1>
 
   <!-- Left Sticky Ad -->
-  <div style="position: fixed; left: 0; top: 120px; width: 160px; height: 600px; z-index: 999;">
+  <div class="side-ad">
     <ins class="adsbygoogle"
          style="display:inline-block;width:160px;height:600px"
          data-ad-client="ca-pub-3427704918049291"
@@ -28,8 +26,8 @@
     </script>
   </div>
 
-  <!-- Main Game UI -->
-  <div class="game-container" style="margin-left: 180px;">
+  <!-- Main Game -->
+  <div class="game-container">
     <img src="stone.png" id="mineBlock" onclick="mine()" />
 
     <p>Blocks Mined: <span id="totalCount">0</span></p>
@@ -39,35 +37,32 @@
     <p>Prestige Cost: <span id="prestigeCost">10000</span></p>
 
     <hr />
-
     <h2>🔧 Upgrades</h2>
     <button onclick="buyPickaxe()">🪓 Upgrade Pickaxe (Cost: <span id="pickaxeCost">50</span>)</button>
     <button onclick="buyFortune()">💰 Fortune (Max 3)</button>
     <button onclick="buyEfficiency()">⚡ Efficiency (Max 5)</button>
-
+    
     <hr />
-
     <h2>🤖 Auto-Miners</h2>
     <div id="minersContainer"></div>
-
+    
     <hr />
-
     <button onclick="prestige()">🏆 Prestige</button>
     <button onclick="resetGame()">🔁 Reset Game</button>
   </div>
 
   <script src="script.js"></script>
 
+  <!-- Prevent double-tap zoom -->
   <script>
-  let lastTouchEnd = 0;
-  document.addEventListener('touchend', function (event) {
-    let now = new Date().getTime();
-    if (now - lastTouchEnd <= 300) {
-      event.preventDefault(); // Prevent zoom
-    }
-    lastTouchEnd = now;
-  }, false);
-</script>
-
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function (event) {
+      let now = new Date().getTime();
+      if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, false);
+  </script>
 </body>
 </html>

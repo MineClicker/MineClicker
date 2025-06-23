@@ -1,133 +1,143 @@
 window.onload = () => {
   let totalCount = 0;
   let pickaxePower = 1;
-  let prestigeLevel = 0;
   let pickaxeLevel = 1;
-  const miners = {
-    "Iron Golem": { count: 0, baseCost: 500, costMult: 1.15, rps: 1 },
-    "Wither":     { count: 0, baseCost: 2000, costMult: 1.2, rps: 5 },
-    "Dragon":     { count: 0, baseCost: 7500, costMult: 1.25, rps: 20 },
-    "Warden":     { count: 0, baseCost: 20000, costMult: 1.3, rps: 75 }
-  };
+  let prestigeLevel = 0;
 
-  const mine = () => {
+  const autominers = [
+    { name: "Iron Golem", cost: 200, rps: 1, owned: 0 },
+    { name: "Wither", cost: 1000, rps: 5, owned: 0 },
+    { name: "Dragon", cost: 5000, rps: 20, owned: 0 },
+    { name: "Warden", cost: 20000, rps: 100, owned: 0 },
+  ];
+
+  let pickaxeCost = 50;
+
+  function updateUI() {
+    document.getElementById("totalCount").textContent = Math.floor(totalCount);
+    document.getElementById("pickaxePower").textContent = pickaxePower;
+    document.getElementById("rps").textContent = calculateRPS();
+    document.getElementById("pickaxeCost").textContent = pickaxeCost;
+    document.getElementById("prestigeLevel").textContent = prestigeLevel;
+    document.getElementById("prestigeCost").textContent = getPrestigeCost();
+
+    const minerHTML = autominers.map((miner, index) => `
+      <div>
+        <button onclick="buyMiner(${index})">💠 ${miner.name} (Cost: ${miner.cost})</button>
+        <span>Owned: ${miner.owned}</span>
+      </div>
+    `).join('');
+    document.getElementById("minersContainer").innerHTML = minerHTML;
+  }
+
+  function calculateRPS() {
+    return autominers.reduce((sum, m) => sum + m.rps * m.owned, 0);
+  }
+
+  function mine() {
     const gain = pickaxePower * (1 + prestigeLevel * 0.1);
     totalCount += gain;
     shakeBlock();
     updateUI();
     saveGame();
-  };
+  }
 
-  const shakeBlock = () => {
+  function shakeBlock() {
     const block = document.getElementById("mineBlock");
     block.style.transform = "scale(0.95)";
     setTimeout(() => (block.style.transform = "scale(1)"), 100);
-  };
+  }
 
-  const buyPickaxe = () => {
-    const cost = Math.floor(50 * Math.pow(1.25, pickaxeLevel));
-    if (totalCount >= cost) {
-      totalCount -= cost;
+  function buyPickaxe() {
+    if (totalCount >= pickaxeCost) {
+      totalCount -= pickaxeCost;
       pickaxeLevel++;
       pickaxePower++;
+      pickaxeCost = Math.floor(pickaxeCost * 1.75);
       updateUI();
       saveGame();
     }
-  };
+  }
 
-  const prestige = () => {
-    if (totalCount >= 10000) {
+  function buyMiner(index) {
+    const miner = autominers[index];
+    if (totalCount >= miner.cost) {
+      totalCount -= miner.cost;
+      miner.owned++;
+      miner.cost = Math.floor(miner.cost * 1.6);
+      updateUI();
+      saveGame();
+    }
+  }
+
+  function getPrestigeCost() {
+    return 10000 * (prestigeLevel + 1);
+  }
+
+  function prestige() {
+    const cost = getPrestigeCost();
+    if (totalCount >= cost) {
       totalCount = 0;
       pickaxePower = 1;
       pickaxeLevel = 1;
+      pickaxeCost = 50;
+      autominers.forEach(m => {
+        m.owned = 0;
+        m.cost = m.cost; // Reset cost to original
+      });
       prestigeLevel++;
-      for (let key in miners) miners[key].count = 0;
       updateUI();
       saveGame();
     }
-  };
+  }
 
-  const buyMiner = (name) => {
-    const miner = miners[name];
-    const cost = Math.floor(miner.baseCost * Math.pow(miner.costMult, miner.count));
-    if (totalCount >= cost) {
-      totalCount -= cost;
-      miner.count++;
-      updateUI();
-      saveGame();
-    }
-  };
+  function resetGame() {
+    localStorage.removeItem("mineclicker-save");
+    location.reload();
+  }
 
-  const getTotalRPS = () => {
-    let rps = 0;
-    for (let key in miners) {
-      rps += miners[key].count * miners[key].rps;
-    }
-    return rps * (1 + prestigeLevel * 0.1);
-  };
-
-  const updateUI = () => {
-    document.getElementById("totalCount").textContent = Math.floor(totalCount);
-    document.getElementById("pickaxePower").textContent = pickaxePower;
-    document.getElementById("prestigeLevel").textContent = prestigeLevel;
-    document.getElementById("pickaxeCost").textContent = Math.floor(50 * Math.pow(1.25, pickaxeLevel));
-    document.getElementById("totalRPS").textContent = getTotalRPS().toFixed(1);
-
-    const container = document.getElementById("minersContainer");
-    container.innerHTML = "";
-    for (let key in miners) {
-      const miner = miners[key];
-      const cost = Math.floor(miner.baseCost * Math.pow(miner.costMult, miner.count));
-
-      const card = document.createElement("div");
-      card.className = "miner-card";
-      card.innerHTML = `
-        <img src="${key.toLowerCase().replace(" ", "_")}.png" alt="${key}" />
-        <h3>${key} x${miner.count}</h3>
-        <p>+${miner.rps * miner.count} RPS</p>
-        <p>Cost: ${cost} blocks</p>
-        <button onclick="buyMiner('${key}')">Hire</button>
-      `;
-      container.appendChild(card);
-    }
-  };
-
-  const saveGame = () => {
-    const save = {
+  function saveGame() {
+    const saveData = {
       totalCount,
       pickaxePower,
       pickaxeLevel,
+      pickaxeCost,
       prestigeLevel,
-      miners
+      autominers,
     };
-    localStorage.setItem("mineclicker-save", JSON.stringify(save));
-  };
+    localStorage.setItem("mineclicker-save", JSON.stringify(saveData));
+  }
 
-  const loadGame = () => {
+  function loadGame() {
     const saved = JSON.parse(localStorage.getItem("mineclicker-save"));
     if (saved) {
       totalCount = saved.totalCount ?? 0;
       pickaxePower = saved.pickaxePower ?? 1;
       pickaxeLevel = saved.pickaxeLevel ?? 1;
+      pickaxeCost = saved.pickaxeCost ?? 50;
       prestigeLevel = saved.prestigeLevel ?? 0;
-      Object.keys(miners).forEach(key => {
-        miners[key].count = saved.miners?.[key]?.count ?? 0;
-      });
+      if (saved.autominers) {
+        saved.autominers.forEach((savedMiner, i) => {
+          if (autominers[i]) {
+            autominers[i].owned = savedMiner.owned;
+            autominers[i].cost = savedMiner.cost;
+          }
+        });
+      }
     }
-  };
+  }
 
-  // Expose
-  window.mine = mine;
-  window.buyPickaxe = buyPickaxe;
-  window.prestige = prestige;
-  window.buyMiner = buyMiner;
-
-  // Init
   loadGame();
   updateUI();
   setInterval(() => {
-    totalCount += getTotalRPS();
+    totalCount += calculateRPS();
     updateUI();
     saveGame();
   }, 1000);
+
+  window.mine = mine;
+  window.buyPickaxe = buyPickaxe;
+  window.buyMiner = buyMiner;
+  window.prestige = prestige;
+  window.resetGame = resetGame;
 };

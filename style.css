@@ -1,25 +1,26 @@
 body {
-  background-color: #1e1e1e;
-  color: #e0e0e0;
-  font-family: 'Press Start 2P', monospace;
+  background-color: #111;
+  color: #fff;
+  font-family: 'Press Start 2P', cursive;
   text-align: center;
   padding: 20px;
 }
 
-img {
+img#mineBlock {
   width: 128px;
   cursor: pointer;
-  margin-bottom: 20px;
+  transition: transform 0.1s;
 }
 
-button {
-  margin: 10px;
+img#mineBlock:active {
+  transform: scale(0.95);
+}
+
+#inventory, #upgrades, #prestige {
+  margin-top: 20px;
+  border: 1px solid #444;
   padding: 10px;
-  font-size: 12px;
-  font-family: 'Press Start 2P', monospace;
-  cursor: pointer;
-}
-
-#inventory, #upgrades {
-  margin-top: 30px;
+  border-radius: 8px;
+  background-color: #222;
+  display: inline-block;
 }

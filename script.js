@@ -42,4 +42,6 @@ window.onload = () => {
 
   // 👇 THIS IS IMPORTANT 👇
   window.mine = mine;
+  window.buyPickaxe = buyPickaxe;
+  window.prestige = prestige;
 };

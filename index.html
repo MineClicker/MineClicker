@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mine Clicker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>⛏️ Mine Clicker</h1>
+
+  <div class="game-container">
+    <button id="mineBlock" onclick="mine()">🪨 Mine Block</button>
+    <p>Resources Mined: <span id="count">0</span></p>
+    <p>Resources per second: <span id="rps">0</span></p>
+
+    <hr />
+    <h2>Upgrades</h2>
+    <button onclick="buyPickaxe()">🪓 Buy Better Pickaxe (10 blocks)</button>
+    <p>Pickaxe Level: <span id="pickaxeLevel">1</span></p>
+
+    <button onclick="buyMiner()">🤖 Hire Auto-Miner (50 blocks)</button>
+    <p>Auto-Miners Owned: <span id="miners">0</span></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
